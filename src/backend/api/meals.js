@@ -52,79 +52,63 @@ router.get('/:id', async (request, response) => {
     }
 });
 
-//api/meals?maxPrice=90
+//api/meals  works fine with multiple parameters now
 router.get('/', async (request, response) => {
+    let titles = knex('meal');
+
+    if ('maxPrice' in request.query) {
+        const maxPrice = Number(request.query.maxPrice);
+        if (isNaN(request.query.maxPrice)) {
+            return response.send('Not a number');
+        } else {
+            // titles = titles.filter((meal) => meal.price < maxPrice);
+            titles = titles.where('meal.price', '<', maxPrice);
+        }
+    }
+    if ('availableReservations' in request.query) {
+        titles = titles
+            .join('reservation', 'meal.id', '=', 'reservation.meal_id')
+            .select(
+                'meal.id',
+                'title',
+                'max_reservations',
+                knex.raw('SUM(number_of_guests) AS total_guests'),
+                knex.raw(
+                    '(max_reservations-SUM(number_of_guests)) AS "Available Reservation"',
+                ),
+            )
+            .where('max_reservations', '>', 'number_of_guests')
+            .groupBy('meal_id')
+            .having(knex.raw('(max_reservations-SUM(number_of_guests)) > 0'));
+    }
+
+    if ('title' in request.query) {
+        const title = request.query.title.toLowerCase();
+        if (!isNaN(request.query.title)) {
+            return response.send('Not a valid title');
+        } else {
+            titles = titles.where('meal.title', 'like', '%' + title + '%');
+            //filter((meal) => meal.title.toLowerCase().includes(title));
+        }
+    }
+
+    if ('createdAfter' in request.query) {
+        const createdAfter = new Date(request.query.createdAfter);
+        // titles =titles.filter((meal) => meal.created_date < createdAfter);
+        titles = titles.where('meal.created_date' < createdAfter);
+    }
+
+    if ('limit' in request.query) {
+        const limit = Number(request.query.limit);
+        if (isNaN(request.query.limit)) {
+            return response.send('Not a valid limit');
+        } else {
+            titles = titles.limit(limit);
+        }
+    }
     try {
-        let titles = await knex('meal');
-
-        if ('maxPrice' in request.query) {
-            const maxPrice = Number(request.query.maxPrice);
-            titles = await (
-                await knex('meal')
-            ).filter((meal) => meal.price < maxPrice);
-            if (isNaN(request.query.maxPrice)) {
-                return response.send('Not a number max price');
-            } else {
-                return response.json(titles);
-            }
-        }
-        if ('availableReservations' in request.query) {
-            const titles = await knex('meal')
-                .join('reservation', 'meal.id', '=', 'reservation.meal_id')
-                .select(
-                    'meal.id',
-                    'title',
-                    'max_reservations',
-                    knex.raw('SUM(number_of_guests) AS total_guests'),
-                    knex.raw(
-                        '(max_reservations-SUM(number_of_guests)) AS "Available Reservation"',
-                    ),
-                )
-                .where('max_reservations', '>', 'number_of_guests')
-                .groupBy('meal_id')
-                .having(
-                    knex.raw('(max_reservations-SUM(number_of_guests)) > 0'),
-                );
-
-            return response.json(titles);
-        }
-
-        if ('title' in request.query) {
-            const title = request.query.title;
-            titles = await (
-                await knex('meal')
-            ).filter((meal) => meal.title.match(title));
-            if (!isNaN(request.query.title)) {
-                return response.send('Not a valid title');
-            } else {
-                return response.json(titles);
-            }
-        }
-
-        if ('createdAfter' in request.query) {
-            const createdAfter = new Date(request.query.createdAfter);
-            const titles = await (
-                await knex('meal')
-            ).filter((meal) => meal.created_date < createdAfter);
-        }
-
-        if ('limit' in request.query) {
-            const limit = Number(request.query.limit);
-            titles = await knex('meal').limit(limit);
-            if (isNaN(request.query.limit)) {
-                return response.send('Not a valid limit');
-            } else {
-                return response.json(titles);
-            }
-        }
-        if ('limit' in request.query && 'maxPrice' in request.query) {
-            const maxPrice = Number(request.query.maxPrice);
-            const limit = Number(request.query.limit);
-            titles = await knex('meal')
-                .where('price', '<=', maxPrice)
-                .limit(limit);
-        }
-        response.json(titles);
+        const titlesRecord = await titles;
+        response.json(titlesRecord);
     } catch (error) {
         throw error;
     }
