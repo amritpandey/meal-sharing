@@ -71,10 +71,13 @@ router.get('/', async (request, response) => {
             .select(
                 'meal.id',
                 'title',
+                'price',
+                'location',
+                'when',
                 'max_reservations',
                 knex.raw('SUM(number_of_guests) AS total_guests'),
                 knex.raw(
-                    '(max_reservations-SUM(number_of_guests)) AS "Available Reservation"',
+                    '(max_reservations-SUM(number_of_guests)) AS "available_reservation"',
                 ),
             )
             .where('max_reservations', '>', 'number_of_guests')
