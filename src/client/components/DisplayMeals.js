@@ -12,7 +12,7 @@ export const DisplayMeals = ({ title }) => {
                         <h2>{item.title}</h2>
                         <p>{item.description}</p>
                         <p>Price: {item.price} dkk</p>
-                        <div className='detail-review'>
+                        <div className="detail-review">
                             <Link to={`/meals/${item.id}`}>
                                 <p>Reserve seat</p>
                             </Link>
@@ -26,9 +26,5 @@ export const DisplayMeals = ({ title }) => {
             </>
         );
     });
-    return (
-        <div className="each-meal">
-            {singleTitle}
-        </div>
-    );
+    return <div className="each-meal">{singleTitle}</div>;
 };

@@ -20,22 +20,22 @@ export const NewMeal = () => {
         const value = event.target.value;
         setInputs((values) => ({ ...values, [name]: value }));
     };
-console.log(inputs.title);
+    console.log(inputs.title);
     //handle the submitted form post
     const handleSubmit = (event) => {
         if (
-          inputs.title === undefined ||
-          inputs.description === undefined ||
-          inputs.location === undefined ||
-          inputs.when === undefined ||
-          inputs.maxReservation === undefined ||
-          inputs.price === undefined ||
-          inputs.createdDate === undefined
-      ) {
-          alert('one or many of field(s) are empty');
-          return;
-      }
-     
+            inputs.title === undefined ||
+            inputs.description === undefined ||
+            inputs.location === undefined ||
+            inputs.when === undefined ||
+            inputs.maxReservation === undefined ||
+            inputs.price === undefined ||
+            inputs.createdDate === undefined
+        ) {
+            alert('one or many of field(s) are empty');
+            return;
+        }
+
         const objToPost = {
             id: mealId + 1,
             title: inputs.title,

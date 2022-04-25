@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import "../home.css";
+import '../home.css';
 
 export const ReviewsWithId = () => {
     const { id } = useParams();
@@ -45,21 +45,39 @@ export const ReviewsWithId = () => {
         .filter((r) => r.meal_id == id)
         .map((review) => (
             <>
-            <div className='individual-meal-review'>
-                <h2>Review: {review.title}</h2>
-                <p>{review.description}</p>
-                <p>{getStars(review.stars)}</p>
-                <p>{review.created_date.split('T')[0]}</p>
+                <div className="individual-meal-review">
+                    <h2>Review: {review.title}</h2>
+                    <p>{review.description}</p>
+                    <p>{review.created_date.split('T')[0]}</p>
+                    <p className="review-stars">{getStars(review.stars)}</p>
                 </div>
             </>
         ));
     return (
-        <div className="single-item-detail">
-            <p style={{backgroundColor:"red", padding:"15px", color:"white", fontSize:"2rem"}}> Meal Id: {id}</p>
-            {specificReview != 0 ? specificReview : <p style={{fontSize:"25px",color:"green"}}>No review found.</p>}
-            <Link to="/meals">
-                <p>Back</p>
-            </Link>
+        <div>
+            <p
+                style={{
+                    backgroundColor: 'red',
+                    padding: '15px',
+                    color: 'white',
+                    fontSize: '2rem',
+                }}
+            >
+                {' '}
+                Meal Id: {id}
+            </p>
+            <div className="single-item-detail-review">
+                {specificReview != 0 ? (
+                    specificReview
+                ) : (
+                    <p style={{ fontSize: '25px', color: 'green' }}>
+                        No review found.
+                    </p>
+                )}
+                <Link to="/meals">
+                    <p>Back</p>
+                </Link>
+            </div>
         </div>
     );
 };

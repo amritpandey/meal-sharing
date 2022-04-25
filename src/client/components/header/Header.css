@@ -1,11 +1,7 @@
 .header {
     display: flex;
     justify-content: space-between;
-    background-image: url('https://cdn.shopify.com/s/files/1/0254/0221/2401/files/BTR_BLOG_POST_HEADER_4_1024x1024.png?v=1598224317');
-    height: 200px;
-    width: 100%;
-    background-size: cover;
-    background-repeat: repeat;
+    background-color: rgb(242, 177, 177);
 }
 .header > h2 {
     margin-left: 7.5px;
@@ -16,7 +12,7 @@ nav {
     list-style-type: none;
     display: flex;
     flex-direction: row;
-    margin-top: 5rem;
+    margin-top: 2.5rem;
     font-family: 'Satisfy', cursive;
     font-size: larger;
 }

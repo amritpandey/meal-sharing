@@ -1,44 +1,41 @@
 import React, { useEffect, useState } from 'react';
 import './home.css';
+import {FancyBorder} from "./FancyBorder.js";
+
 
 export default function Home() {
-return(
-  <div className='home-page'>
-    
+ return(
+  <div>
+    <img className='home-image' src="https://www.bypeople.com/wp-content/uploads/2018/09/stock-food-photos-bundle-bypeople-deals.png"/>
+    <div className='home-page-text'>
     <p>A great restaurant website supports all of your restaurant marketing activities: it can attract new customers, maintain loyal ones, and raise the overall profile of the establishment outside of the physical location. It's a crucial aspect of running a successful business.</p> 
-
-<p>As you work to create a restaurant website, keep customer data in mind. Gathering, and using, customer data in the right way can maximize your ability to attract, retain, and deepen the connection with your guests. </p>
+    <p>As you work to create a restaurant website, keep customer data in mind. Gathering, and using, customer data in the right way can maximize your ability to attract, retain, and deepen the connection with your guests. </p>
+ </div>
  </div>
 )
-
-}
-   /*   const [allMeal, setAllMeal] = useState([]);
-     const [search, setSearch] = useState("");
-
+} 
+ /* // need to work for fetch only high rated meals on frontpage
+   
+  const [allMeal, setAllMeal] = useState([]);
+     
     useEffect(() => {
         fetchPath();
-        fetchSearch();
     }, []);
 
-    const fetchSearch = async () => {
-        const fetchApi = await fetch(`http://localhost:3000/api/meals?title=${search}`);
-        const fetchResponse = await fetchApi.json();
-        setSearch(fetchResponse);
-    };
-console.log(search);
-    // search functionality
     const fetchPath = async () => {
-      const fetchApi = await fetch('http://localhost:3000/api/meals');
+      const fetchApi = await fetch(`http://localhost:3000/api/meals`);
       const fetchResponse = await fetchApi.json();
       setAllMeal(fetchResponse);
   };
 
-    const mapFetchData = allMeal.map((data) => {
+    const mapFetchData = allMeal.map((data, index) => {
         return (
             <FancyBorder>
+              <div key={index}>
                 <h3>{data.title}</h3>
                 <p>{data.description}</p>
                 <p>{data.price} DKK</p>
+                </div>
             </FancyBorder>
         );
     });
@@ -54,11 +51,10 @@ console.log(search);
                     className="search-meal"
                     type="text"
                     placeholder="Search for meal..."
-                    onChange={(e)=>setSearch(e.target.value)}
                 />
             </section>
             <div className="each-meal">{mapFetchData} </div>           
         </div>
         
-    );*/
-
+    );
+    }*/
