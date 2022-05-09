@@ -20,15 +20,15 @@ export default function Home() {
     const mapTopMeals = topMeal.map((top, index) => {
         return (
             <FancyBorder>
-                <div  key={index}>
+                <div className='top-meal-individual' key={index}>
                     <h3>{top.title}</h3>
                     <p>{top.description}</p>
-                    <p>price: {top.price} DKK</p>
-                    <ReactStars
+                    <p>price: {top.price} dkk</p>
+                    <p><ReactStars 
                       stars={top.stars}
                       size={26}
-                     
-                    />
+                      color={"red"}
+                    /></p>
                 </div>
             </FancyBorder>
         );
