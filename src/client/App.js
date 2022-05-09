@@ -13,6 +13,7 @@ import Reviews from './components/review/Reviews';
 import { NewReview } from './components/review/NewReview';
 import { Contact } from './components/Contact';
 import { Reservations } from './components/Reservations';
+import { DeleteMeal } from './components/DeleteMeal';
 
 function App() {
     return (
@@ -32,6 +33,9 @@ function App() {
             </Route>
             <Route exact path="/meals/:id">
                 <MealsWithId />
+            </Route>
+            <Route exact path="/deleteMeal/:id">
+                <DeleteMeal />
             </Route>
             <Route exact path="/meal">
                 <NewMeal />

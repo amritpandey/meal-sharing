@@ -52,6 +52,31 @@ router.get('/:id', async (request, response) => {
     }
 });
 
+//make new route top meals
+router.get('/top-meal', async (request, response) => {
+//all the meals
+let titles =  knex('meal');
+
+titles = titles
+            .join('review', 'meal.id', '=', 'review.meal_id')
+            .select(
+                'meal.id',
+                'title',
+                'price',
+                'review.stars',
+            )
+            .where('review.stars', '>', 4)
+           
+            
+//those meals sorted by the amount of the 5 stars review
+//find all 5 stars for given meal
+//count how many 
+//for this given meal how many 5 stars are there
+// sort the list of meals by that number
+// top 3
+// first query ,  
+})
+
 //api/meals  works fine with multiple parameters now
 router.get('/', async (request, response) => {
     let titles = knex('meal');
@@ -65,6 +90,12 @@ router.get('/', async (request, response) => {
             titles = titles.where('meal.price', '<', maxPrice);
         }
     }
+    if ('topMeals' in request.query) {
+          titles = titles.join('review', 'meal.id', '=', 'review.meal_id')
+          .select('meal.title','meal.price','meal.description','review.stars')
+          .where('review.stars', '=', 5)
+          .limit(3);
+  }
     if ('availableReservations' in request.query) {
         titles = titles
             .join('reservation', 'meal.id', '=', 'reservation.meal_id')

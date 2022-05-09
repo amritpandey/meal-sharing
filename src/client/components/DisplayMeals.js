@@ -20,6 +20,10 @@ export const DisplayMeals = ({ title }) => {
                                 {' '}
                                 <p>Review</p>{' '}
                             </Link>
+                            <Link to={`/deleteMeal/${item.id}`}>
+                                {' '}
+                                <p>Delete</p>{' '}
+                            </Link>
                         </div>
                     </section>
                 </FancyBorder>

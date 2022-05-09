@@ -9,9 +9,20 @@
     opacity: 0.6;
 }
 .home-page-text p {
+  display: flex;
     margin: 5%;
     font-weight: bold;
     color: #000000;
+}
+.popular{
+  text-align: center;
+  font-weight: 800;
+  background-color: rgb(212, 110, 51);
+  padding:10px;
+}
+.top-meals{
+display: flex; 
+gap:1rem;
 }
 .fancy-border {
     border: 2px dotted;
@@ -265,7 +276,7 @@ a:visited {
         color: #000;
     }
     49% {
-        color: #000;
+        color: rgb(35, 225, 41);
     }
     60% {
         color: transparent;
@@ -274,6 +285,6 @@ a:visited {
         color: transparent;
     }
     100% {
-        color: #000;
+        color: rgb(143, 25, 25);
     }
 }
