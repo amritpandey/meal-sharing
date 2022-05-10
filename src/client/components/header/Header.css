@@ -3,6 +3,10 @@
     justify-content: space-between;
     background-color: rgb(242, 177, 177);
 }
+.logo{
+  width: 100px;
+  height: 100px;
+}
 .header > h2 {
     margin-left: 7.5px;
     font-family: 'Pacifico', cursive;

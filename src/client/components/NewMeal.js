@@ -3,16 +3,7 @@ import './home.css';
 
 export const NewMeal = () => {
     // controlled inputs
-    const [mealId, setMealId] = useState('');
     const [inputs, setInputs] = useState({});
-
-    //to get new meal id
-    fetch(`http://localhost:3000/api/meals`)
-        .then((res) => res.json())
-        .then((data) => {
-            const total = data.length;
-            setMealId(total);
-        });
 
     //multiple inputs field handled
     const handleChange = (event) => {
@@ -20,24 +11,12 @@ export const NewMeal = () => {
         const value = event.target.value;
         setInputs((values) => ({ ...values, [name]: value }));
     };
-    console.log(inputs.title);
+    
     //handle the submitted form post
     const handleSubmit = (event) => {
-        if (
-            inputs.title === undefined ||
-            inputs.description === undefined ||
-            inputs.location === undefined ||
-            inputs.when === undefined ||
-            inputs.maxReservation === undefined ||
-            inputs.price === undefined ||
-            inputs.createdDate === undefined
-        ) {
-            alert('one or many of field(s) are empty');
-            return;
-        }
-
+   
         const objToPost = {
-            id: mealId + 1,
+           // id: mealId + 1,
             title: inputs.title,
             description: inputs.description,
             location: inputs.location,
@@ -81,6 +60,7 @@ export const NewMeal = () => {
                             name="title"
                             value={inputs.title || ''}
                             onChange={handleChange}
+                            required
                         />
                     </label>
                 </div>
@@ -92,6 +72,7 @@ export const NewMeal = () => {
                             name="description"
                             value={inputs.description || ''}
                             onChange={handleChange}
+                            required
                         />
                     </label>
                 </div>
@@ -103,6 +84,7 @@ export const NewMeal = () => {
                             name="location"
                             value={inputs.location || ''}
                             onChange={handleChange}
+                            required
                         />
                     </label>
                 </div>
@@ -114,6 +96,7 @@ export const NewMeal = () => {
                             name="when"
                             value={inputs.when || ''}
                             onChange={handleChange}
+                            required
                         />
                     </label>
                 </div>
@@ -125,6 +108,7 @@ export const NewMeal = () => {
                             name="maxReservation"
                             value={inputs.maxReservation || ''}
                             onChange={handleChange}
+                            required
                         />
                     </label>
                 </div>
@@ -136,6 +120,7 @@ export const NewMeal = () => {
                             name="price"
                             value={inputs.price || ''}
                             onChange={handleChange}
+                            required
                         />
                     </label>
                 </div>
@@ -147,6 +132,7 @@ export const NewMeal = () => {
                             name="createdDate"
                             value={inputs.createdDate || ''}
                             onChange={handleChange}
+                            required
                         />
                     </label>
                 </div>

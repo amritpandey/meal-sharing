@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useParams,Link } from 'react-router-dom';
 import '../home.css';
+import ReactStars from "react-rating-stars-component";
 
 export const ReviewsWithId = () => {
     const { id } = useParams();
@@ -49,7 +49,8 @@ export const ReviewsWithId = () => {
                     <h2>Review: {review.title}</h2>
                     <p>{review.description}</p>
                     <p>{review.created_date.split('T')[0]}</p>
-                    <p className="review-stars">{getStars(review.stars)}</p>
+                    <p className="review-stars">{getStars(review.stars)}</p> 
+                  
                 </div>
             </>
         ));

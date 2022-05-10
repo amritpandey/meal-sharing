@@ -1,16 +1,7 @@
 import React, { useState } from 'react';
 import '../home.css';
 export const NewReview = () => {
-    const [mealId, setMealId] = useState('');
     const [inputs, setInputs] = useState({});
-
-    //to get new meal id
-    fetch(`http://localhost:3000/api/meals`)
-        .then((res) => res.json())
-        .then((data) => {
-            const total = data.length;
-            setMealId(total);
-        });
 
     //multiple inputs field handled
     const handleChange = (event) => {
@@ -21,16 +12,7 @@ export const NewReview = () => {
 
     //handle the submitted form post
     const handleSubmit = (event) => {
-        if (
-            inputs.id === undefined ||
-            inputs.title === undefined ||
-            inputs.description === undefined ||
-            inputs.stars === undefined ||
-            inputs.createdDate === undefined
-        ) {
-            alert('one or many of field(s) are empty');
-            return;
-        }
+      
         const objToPost = {
             meal_id: inputs.id,
             title: inputs.title,
@@ -78,6 +60,7 @@ export const NewReview = () => {
                             name="id"
                             value={inputs.id || ''}
                             onChange={handleChange}
+                            required
                         />
                     </label>
                 </div>
@@ -90,6 +73,7 @@ export const NewReview = () => {
                             value={inputs.title || ''}
                             onChange={handleChange}
                             placeholder="e.g. good, bad"
+                            required
                         />
                     </label>
                 </div>
@@ -101,6 +85,7 @@ export const NewReview = () => {
                             name="description"
                             value={inputs.description || ''}
                             onChange={handleChange}
+                            required
                         />
                     </label>
                 </div>
@@ -112,6 +97,8 @@ export const NewReview = () => {
                             name="stars"
                             value={inputs.stars || ''}
                             onChange={handleChange}
+                            required
+                            min="1" max="5"
                         />
                     </label>
                 </div>
@@ -123,6 +110,7 @@ export const NewReview = () => {
                             name="createdDate"
                             value={inputs.createdDate || ''}
                             onChange={handleChange}
+                            required
                         />
                     </label>
                 </div>

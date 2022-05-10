@@ -3,7 +3,7 @@ import { DisplayMeals } from './DisplayMeals';
 import { Link } from 'react-router-dom';
 
 export default function Meals() {
-    const [title, setNewTitle] = useState([]);
+    const [meals, setMeals] = useState([]);
 
     useEffect(() => {
         fetchData();
@@ -12,7 +12,7 @@ export default function Meals() {
     const fetchData = async () => {
         const result = await fetch('http://localhost:3000/api/meals');
         const fetchResult = await result.json();
-        setNewTitle(fetchResult);
+        setMeals(fetchResult);
     };
 
     return (
@@ -23,7 +23,7 @@ export default function Meals() {
                     <button>Add new meal</button>
                 </Link>
             </div>
-            <DisplayMeals title={title} />
+            <DisplayMeals meals={meals} />
         </div>
     );
 }

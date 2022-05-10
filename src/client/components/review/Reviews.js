@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../home.css';
+import ReactStars from "react-rating-stars-component";
 
 export default function Reviews() {
-    const [title, setNewTitle] = useState([]);
+    const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
         fetchData();
@@ -12,7 +13,7 @@ export default function Reviews() {
     const fetchData = async () => {
         const result = await fetch(`http://localhost:3000/api/reviews`);
         const fetchResult = await result.json();
-        setNewTitle(fetchResult);
+        setReviews(fetchResult);
     };
 
     const getStars = (stars) => {
@@ -40,12 +41,12 @@ export default function Reviews() {
         return numberOfStars;
     };
 
-    const specificReview = title.map((review) => (
+    const specificReview = reviews.map((review) => (
         <div className="review-design">
             <h2>Review: {review.title}</h2>
             <p> Meal Id: {review.meal_id}</p>
             <p> Description: {review.description}</p>
-            <p> Stars: {getStars(review.stars)}</p>
+            <p> Stars: {getStars(review.stars)}</p> 
             <p> Posted: {review.created_date.split('T')[0]}</p>
         </div>
     ));

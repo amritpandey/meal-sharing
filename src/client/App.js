@@ -49,9 +49,6 @@ function App() {
             <Route exact path="/contact">
                 <Contact />
             </Route>
-            <Route exact path="/test-component">
-                <TestComponent></TestComponent>
-            </Route>
             <Footer />
         </Router>
     );

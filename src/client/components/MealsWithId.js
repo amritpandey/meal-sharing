@@ -7,7 +7,7 @@ export const MealsWithId = () => {
     const { id } = useParams();
     const [availableReservation, setAvailableReservation] = useState([]);
 
-    const [title, setNewTitle] = useState([]);
+    const [meals, setMeals] = useState([]);
     const [success, setSuccess] = useState('');
     const [error, setError] = useState('');
 
@@ -19,36 +19,41 @@ export const MealsWithId = () => {
 
     useEffect(() => {
         fetchData();
+        fetchAvailableReservations();
     }, []);
 
     const fetchData = async () => {
         const result = await fetch(`http://localhost:3000/api/meals/${id}`);
         const fetchResult = await result.json();
-        setNewTitle(fetchResult);
+        setMeals(fetchResult);
     };
 
-    useEffect(() => {
-        const result = fetch(
+    const fetchAvailableReservations = async () => {
+        const result = await fetch(
             `http://localhost:3000/api/meals?availableReservations`,
-        )
-            .then((res) => res.json())
-            .then((data) => setAvailableReservation(data));
-    }, []);
+        );
+        const fetchResult = await result.json();
+        setAvailableReservation(fetchResult);
+    };
 
+    //current date 
+    function getCurrentDate() {
+      let today = new Date();
+      let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+      return date;
+    }
+    
     //handle the submitted form post
     const handleSubmit = async (event) => {
-      event.preventDefault();
-        if (seats === '' || phone === '' || name === '' || email === '') {
-            alert('form cant be empty');
-            return;
-        }
+        event.preventDefault();
+
         const objToPost = {
             number_of_guests: seats,
             contact_phonenumber: phone,
             contact_name: name,
             contact_email: email,
             meal_id: id,
-            created_date: '2022-02-28',
+            created_date: getCurrentDate(),
         };
 
         // POST request using fetch() to post in backend
@@ -75,11 +80,11 @@ export const MealsWithId = () => {
                 return;
             }
         } catch (error) {
-           console.log("catch:", error);
+            console.log('catch:', error);
         }
     };
     //mapping to get the specific meal
-    const specificReview = title.map((review) => (
+    const specificReview = meals.map((review, index) => (
         <>
             <h2>Name : {review.title}</h2>
             <p>Location : {review.location}</p>
@@ -117,6 +122,7 @@ export const MealsWithId = () => {
                                 type="number"
                                 value={seats}
                                 onChange={(e) => setSeats(e.target.value)}
+                                required
                             />
                         </label>
                         <br />
@@ -126,6 +132,7 @@ export const MealsWithId = () => {
                                 type="number"
                                 value={phone}
                                 onChange={(e) => setPhone(e.target.value)}
+                                required
                             />
                         </label>
                         <br />
@@ -135,6 +142,7 @@ export const MealsWithId = () => {
                                 type="text"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
+                                required
                             />
                         </label>
                         <br />
@@ -144,6 +152,7 @@ export const MealsWithId = () => {
                                 type="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
+                                required
                             />
                         </label>
                         <br />
