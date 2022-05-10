@@ -37,8 +37,11 @@ export default function Home() {
         <div>
             <img
                 className="home-image"
-                src="https://www.bypeople.com/wp-content/uploads/2018/09/stock-food-photos-bundle-bypeople-deals.png"
-            />
+               // src="https://www.bypeople.com/wp-content/uploads/2018/09/stock-food-photos-bundle-bypeople-deals.png"
+               //src="https://images.pexels.com/photos/3184192/pexels-photo-3184192.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"            
+               src='https://images.pexels.com/photos/54455/cook-food-kitchen-eat-54455.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+               />
+            
             <div className="home-page-text">
                 <h1 className='blinking popular'>
                    Our Popular Meals
