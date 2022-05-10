@@ -10,7 +10,7 @@ export default function Meals() {
     }, []);
 
     const fetchData = async () => {
-        const result = await fetch('http://localhost:3000/api/meals');
+        const result = await fetch('/api/meals');
         const fetchResult = await result.json();
         setMeals(fetchResult);
     };

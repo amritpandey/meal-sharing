@@ -7,7 +7,7 @@ export const Reservations = () => {
     const [availableReservation, setAvailableReservation] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:3000/api/meals?availableReservations`)
+        fetch(`/api/meals?availableReservations`)
             .then((res) => res.json())
             .then((data) => setAvailableReservation(data));
     }, []);

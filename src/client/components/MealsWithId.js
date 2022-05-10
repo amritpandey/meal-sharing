@@ -23,14 +23,14 @@ export const MealsWithId = () => {
     }, []);
 
     const fetchData = async () => {
-        const result = await fetch(`http://localhost:3000/api/meals/${id}`);
+        const result = await fetch(`/api/meals/${id}`);
         const fetchResult = await result.json();
         setMeals(fetchResult);
     };
 
     const fetchAvailableReservations = async () => {
         const result = await fetch(
-            `http://localhost:3000/api/meals?availableReservations`,
+            `/api/meals?availableReservations`,
         );
         const fetchResult = await result.json();
         setAvailableReservation(fetchResult);
@@ -67,7 +67,7 @@ export const MealsWithId = () => {
                 body: JSON.stringify(objToPost),
             };
             const response = await fetch(
-                'http://localhost:3000/api/reservations',
+                '/api/reservations',
                 config,
             );
             if (response.ok) {

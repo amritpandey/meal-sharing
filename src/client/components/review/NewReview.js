@@ -22,7 +22,7 @@ export const NewReview = () => {
         };
 
         // POST request using fetch to add new meal()
-        fetch('http://localhost:3000/api/reviews', {
+        fetch('/api/reviews', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

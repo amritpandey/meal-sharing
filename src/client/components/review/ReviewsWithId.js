@@ -36,7 +36,7 @@ export const ReviewsWithId = () => {
     }, []);
 
     const fetchData = async () => {
-        const result = await fetch(`http://localhost:3000/api/reviews`);
+        const result = await fetch(`/api/reviews`);
         const fetchResult = await result.json();
         setNewTitle(fetchResult);
     };

@@ -8,7 +8,7 @@ export const DeleteMeal = () => {
 
     const handleDeleteMeal = async () => {
         const deleteMeal = await fetch(
-            `http://localhost:3000/api/meals/${ID}`,
+            `/api/meals/${ID}`,
             {
                 method: 'DELETE',
             },

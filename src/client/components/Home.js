@@ -12,7 +12,7 @@ export default function Home() {
 
     const fetchTopMeals = async () => {
         const fetchApi = await fetch(
-            `http://localhost:3000/api/meals?topMeals`,
+            `/api/meals?topMeals`,
         );
         const fetchResponse = await fetchApi.json();
         setTopMeal(fetchResponse);
@@ -36,9 +36,7 @@ export default function Home() {
     return (
         <div>
             <img
-                className="home-image"
-               // src="https://www.bypeople.com/wp-content/uploads/2018/09/stock-food-photos-bundle-bypeople-deals.png"
-               //src="https://images.pexels.com/photos/3184192/pexels-photo-3184192.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"            
+                className="home-image"           
                src='https://images.pexels.com/photos/54455/cook-food-kitchen-eat-54455.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
                />
             
